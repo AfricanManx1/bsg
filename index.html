@@ -59,7 +59,7 @@ body{background:var(--bg);color:#fff;font-family:Rajdhani,sans-serif;overflow-x:
 .breaking-scroll{flex:1;overflow:hidden;display:flex;align-items:center}.breaking-track{display:inline-flex;align-items:center;white-space:nowrap;padding-left:100%;animation:scroll 120s linear infinite}
 .breaking-link{display:inline-block;padding-right:60px;color:#ff8866;text-decoration:none;font-size:13px;font-family:'Share Tech Mono'}
 .breaking-link:hover{color:#ffaa88}
-#newsTickerWrap{display:flex;height:42px;background:#050b12;border-top:1px solid #00ffee55;border-bottom:1px solid #00ffee55;overflow:hidden}
+#newsTickerWrap{display:flex;flex-direction:column;background:#050b12;border-top:1px solid #00ffee55;border-bottom:1px solid #00ffee55;overflow:hidden}
 .channel{background:#071923;border:none;color:#7fd6df;padding:0 14px;cursor:pointer;font-family:'Share Tech Mono';font-size:12px;white-space:nowrap;transition:background 0.15s,color 0.15s,text-shadow 0.15s,box-shadow 0.15s}.channel.active{background:#0c2430;color:#00ffee;font-weight:700;text-shadow:0 0 8px #00ffee;box-shadow:inset 0 -2px 0 #00ffee}
 .channel-wrap{display:flex;overflow-x:auto;flex-shrink:0}
 .ticker-window{flex:1;overflow:hidden;display:flex;align-items:center}.ticker-track{display:inline-flex;align-items:center;white-space:nowrap;padding-left:100%;animation:scroll 150s linear infinite;font-size:18px}
@@ -146,8 +146,8 @@ a{color:#00ffee;text-decoration:none}
 </header>
 <div id='breakingBanner'><div class='breaking-inner'><span class='breaking-tag'>BREAKING</span><div class='breaking-scroll'><div id='breakingTrack' class='breaking-track'></div></div></div></div>
 <div id='newsTickerWrap'>
-<div style='display:flex;align-items:stretch'><div id='tickerModeToggle' style='display:flex;flex-shrink:0'><button class='channel tickerModeBtn active' onclick='setTickerMode("global")' style='font-weight:700;border-right:2px solid #00ffee44;padding:0 10px;font-size:11px'>GLOBAL</button><button class='channel tickerModeBtn' onclick='setTickerMode("africa")' style='font-weight:700;border-right:2px solid #00ffee44;padding:0 10px;font-size:11px'>AFRICA</button></div><div id='tickerChannels' class='channel-wrap'></div></div>
-<div class='ticker-window'><div id='newsTicker' class='ticker-track'>Loading Tactical Feed...</div></div>
+<div class='ticker-window' style='height:36px;border-bottom:1px solid #00ffee22'><div id='newsTicker' class='ticker-track'>Loading Tactical Feed...</div></div>
+<div style='display:flex;align-items:stretch;height:30px'><div id='tickerModeToggle' style='display:flex;flex-shrink:0'><button class='channel tickerModeBtn active' onclick='setTickerMode("global")' style='font-weight:700;border-right:2px solid #00ffee44;padding:0 10px;font-size:11px'>GLOBAL</button><button class='channel tickerModeBtn' onclick='setTickerMode("africa")' style='font-weight:700;border-right:2px solid #00ffee44;padding:0 10px;font-size:11px'>AFRICA</button></div><div id='tickerChannels' class='channel-wrap'></div></div>
 </div>
 <section class='placeholder'><div id='opsBay' class='ops-bay'></div></section>
 <footer id='commandFooter'>
