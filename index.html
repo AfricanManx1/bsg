@@ -146,7 +146,7 @@ a{color:#00ffee;text-decoration:none}
 </header>
 <div id='breakingBanner'><div class='breaking-inner'><span class='breaking-tag'>BREAKING</span><div class='breaking-scroll'><div id='breakingTrack' class='breaking-track'></div></div></div></div>
 <div id='newsTickerWrap'>
-<div class='channel-wrap'><button class='channel active'>AJ</button><button class='channel'>AP</button><button class='channel'>BBC</button><button class='channel'>CNBC</button><button class='channel'>DW</button><button class='channel'>EURO</button><button class='channel'>FR24</button><button class='channel'>GUARDIAN</button><button class='channel'>REUTERS</button><button class='channel'>RT</button><button class='channel'>SKY</button></div>
+<div class='channel-wrap'><button class='channel active'>AJ</button><button class='channel'>AP</button><button class='channel'>BBC</button><button class='channel'>CNBC</button><button class='channel'>DW</button><button class='channel'>EURO</button><button class='channel'>AFRICA</button><button class='channel'>GUARDIAN</button><button class='channel'>REUTERS</button><button class='channel'>RT</button><button class='channel'>SKY</button></div>
 <div class='ticker-window'><div id='newsTicker' class='ticker-track'>Loading Tactical Feed...</div></div>
 </div>
 <section class='placeholder'><div id='opsBay' class='ops-bay'></div></section>
@@ -377,7 +377,7 @@ let full=false,idx=0;
 function active(id){document.querySelectorAll('.command-btn').forEach(b=>b.classList.remove('active'));document.getElementById(id).classList.add('active')}
 function renderOps(menu,content){opsBay.style.cssText='';full=false;opsBay.innerHTML=`<div id='opsShell'><div id='opsMenu'><button class='panel-trigger' onclick="document.getElementById('opsMenu').classList.toggle('open')" title='COMMAND PANEL'>☰</button><div class='menu-content'>${menu}</div></div><div id='opsViewport' style='height:100%;overflow-y:auto;min-height:0'>${content}</div></div>`}
 
-const globalFeeds=[['WAR ROOM','https://rumble.com/embed/v33aw1a/?pub=4jw3x3'],['AL JAZEERA','https://www.youtube.com/embed/gCNeDWCI0vo'],['DW','https://www.youtube.com/embed/LuKwFajn37U'],['BLOOMBERG','https://www.youtube.com/embed/iEpJwprxDdk'],['FR24','https://www.youtube.com/embed/u9foWyMSETk'],['SKY','https://www.youtube.com/embed/YDvsBbKfLPA']];
+const globalFeeds=[['WAR ROOM','https://rumble.com/embed/v33aw1a/?pub=4jw3x3'],['AL JAZEERA','https://www.youtube.com/embed/gCNeDWCI0vo'],['DW','https://www.youtube.com/embed/LuKwFajn37U'],['BLOOMBERG','https://www.youtube.com/embed/iEpJwprxDdk'],['AFRICA','https://www.youtube.com/embed/NJ1GmKo9zIg'],['SKY','https://www.youtube.com/embed/YDvsBbKfLPA']];
 
 
 const africanChannels=[['DW Africa','https://www.youtube.com/embed/W8nThq62Vb4'],['Africa Live','https://www.youtube.com/embed/E8PRZmDUiPw'],['Africa Today','https://www.youtube.com/embed/NQjabLGdP5g'],['Africa Now','https://www.youtube.com/embed/Mv14aabg4mA'],['Africanews','https://www.youtube.com/embed/NJ1GmKo9zIg']];
@@ -579,13 +579,13 @@ const rss=[
 'https://www.cnbc.com/id/100003114/device/rss/rss.html',
 'https://rss.dw.com/xml/rss-en-all',
 'https://www.euronews.com/rss?format=xml',
-'https://www.france24.com/en/rss',
+'https://www.africanews.com/feed/rss',
 'https://www.theguardian.com/world/rss',
 'https://news.google.com/rss/search?q=site:reuters.com+world&hl=en-US&gl=US&ceid=US:en',
 'https://www.rt.com/rss/news/',
 'https://feeds.skynews.com/feeds/rss/world.xml'
 ];
-const tags=['AJ','AP','BBC','CNBC','DW','EURO','FR24','GUARDIAN','REUTERS','RT','SKY'];let cf=0;
+const tags=['AJ','AP','BBC','CNBC','DW','EURO','AFRICA','GUARDIAN','REUTERS','RT','SKY'];let cf=0;
 document.querySelectorAll('#newsTickerWrap .channel').forEach((b,i)=>b.onclick=()=>{document.querySelectorAll('#newsTickerWrap .channel').forEach(x=>x.classList.remove('active'));b.classList.add('active');cf=i;loadTicker()});
 async function loadTicker(){try{let r=await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(rss[cf]));let d=await r.json();newsTicker.innerHTML=d.items.slice(0,10).map(i=>`<a class='headline-link' href='${safeHref(i.link)}' target='_blank'>[${tags[cf]}] ${esc(i.title)}</a>`).join('')}catch(e){newsTicker.innerHTML='Tactical Feed Offline...'}}
 
