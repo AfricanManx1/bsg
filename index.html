@@ -8,6 +8,7 @@
 <style>
 :root{--cyan:#00ffee;--bg:#02070d;--panel:#061018}
 *{margin:0;padding:0;box-sizing:border-box}
+#opsViewport,#panAfricaViewport,#channelHubViewport,#headlinesFrame,.ai-grid{scrollbar-width:none}#opsViewport::-webkit-scrollbar,#panAfricaViewport::-webkit-scrollbar,#channelHubViewport::-webkit-scrollbar,#headlinesFrame::-webkit-scrollbar,.ai-grid::-webkit-scrollbar{display:none}
 body{background:var(--bg);color:#fff;font-family:Rajdhani,sans-serif;overflow-x:hidden}
 #commandHeader{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;padding:18px 24px;background:linear-gradient(180deg,#07141c,#050b12);background-image:linear-gradient(180deg,rgba(7,20,28,0.88),rgba(5,11,18,0.92)),url('BSG BLACK GOLD.png');background-size:cover;background-position:center;border-bottom:2px solid #00ffee55}
 .brand-wrap{display:flex;align-items:center;gap:15px}
@@ -45,7 +46,8 @@ body{background:var(--bg);color:#fff;font-family:Rajdhani,sans-serif;overflow-x:
 .atw-set-btn:hover{background:#0c2430;box-shadow:0 0 12px #00ffee66}
 .atw-set-btn.active{background:#00ffee;color:#061018;font-weight:bold}
 #atwSearchBox{flex-grow:3}
-.header-right{display:flex;align-items:center;gap:6px;justify-content:flex-end}
+.header-right{display:flex;flex-direction:column;align-items:center;gap:6px;justify-content:flex-end;position:relative}
+.header-right .price-row{display:flex;align-items:center;gap:6px}
 .market-box{padding:4px 8px;text-align:center}
 .market-price{font-size:24px;color:#00ffee}
 #breakingBanner{background:#0a0000;border-bottom:1px solid #ff2200aa;padding:0;overflow:hidden;display:none}
@@ -53,13 +55,13 @@ body{background:var(--bg);color:#fff;font-family:Rajdhani,sans-serif;overflow-x:
 .breaking-inner{display:flex;align-items:center;height:32px}
 .breaking-tag{background:#ff2200;color:#fff;font-family:'Share Tech Mono';font-size:12px;font-weight:700;padding:0 12px;height:100%;display:flex;align-items:center;letter-spacing:1px;animation:breakingPulse 1.5s infinite}
 @keyframes breakingPulse{50%{background:#cc0000}}
-.breaking-scroll{flex:1;overflow:hidden;display:flex;align-items:center}.breaking-track{display:inline-flex;align-items:center;white-space:nowrap;padding-left:100%;animation:scroll 120s linear infinite}
+.breaking-scroll{flex:1;overflow:hidden;display:flex;align-items:center}.breaking-track{display:inline-flex;align-items:center;white-space:nowrap;padding-left:100%;animation:scroll 120s linear infinite}.breaking-scroll:hover .breaking-track{animation-play-state:paused}
 .breaking-link{display:inline-block;padding-right:60px;color:#ff8866;text-decoration:none;font-size:13px;font-family:'Share Tech Mono'}
 .breaking-link:hover{color:#ffaa88}
 #newsTickerWrap{display:flex;flex-direction:column;background:#050b12;border-top:1px solid #00ffee55;border-bottom:1px solid #00ffee55;overflow:hidden}
 .channel{background:#071923;border:none;color:#7fd6df;padding:0 14px;cursor:pointer;font-family:'Share Tech Mono';font-size:12px;white-space:nowrap;transition:background 0.15s,color 0.15s,text-shadow 0.15s,box-shadow 0.15s}.channel.active{background:#0c2430;color:#00ffee;font-weight:700;text-shadow:0 0 8px #00ffee;box-shadow:inset 0 -2px 0 #00ffee}
 .channel-wrap{display:flex;overflow-x:auto;flex-shrink:0}
-.ticker-window{flex:1;overflow:hidden;display:flex;align-items:center}.ticker-track{display:inline-flex;align-items:center;white-space:nowrap;padding-left:100%;animation:scroll 150s linear infinite;font-size:18px}
+.ticker-window{flex:1;overflow:hidden;display:flex;align-items:center}.ticker-track{display:inline-flex;align-items:center;white-space:nowrap;padding-left:100%;animation:scroll 150s linear infinite;font-size:18px}.ticker-window:hover .ticker-track{animation-play-state:paused}
 @keyframes scroll{100%{transform:translateX(-100%)}}
 .headline-link{display:inline-block;padding-right:95px;color:#d7ffff;text-decoration:none;font-size:18px;line-height:42px}
 .placeholder{height:calc(100vh - 126px);display:flex;justify-content:center;align-items:center}
@@ -74,7 +76,7 @@ body{background:var(--bg);color:#fff;font-family:Rajdhani,sans-serif;overflow-x:
 .panel-trigger:hover{background:#0c2430;text-shadow:0 0 8px #00ffee}
 #opsShell.fullscreen #opsMenu{display:none}
 #opsShell.fullscreen #opsViewport{margin-left:0}
-#opsViewport{margin-left:48px}
+#opsViewport{margin-left:48px;background-image:linear-gradient(180deg,rgba(4,11,16,0.92),rgba(6,16,24,0.95)),url('BSG BLACK GOLD.png');background-size:cover;background-position:center;background-repeat:no-repeat}
 .feed-panel{position:relative;background:#000;border:1px solid #0f2730}
 .feed-label{position:absolute;top:10px;left:10px;padding:6px 10px;background:rgba(3,22,29,.8);border:1px solid #00ffee66;color:#00ffee;z-index:2}
 iframe,.map-frame{width:100%;height:100%;border:none}
@@ -82,12 +84,27 @@ iframe,.map-frame{width:100%;height:100%;border:none}
 #flightFrame iframe{filter:invert(92%) hue-rotate(180deg) grayscale(.9) brightness(.6) contrast(1.2)}
 #commandFooter{padding:28px;display:flex;flex-direction:column;align-items:center;background:linear-gradient(180deg,#050b12,#07141c);border-top:2px solid #00ffee55;position:relative}
 .version{position:absolute;right:20px;bottom:12px;font-size:11px;color:#00ffee55;font-family:'Share Tech Mono'}
+#donatePanel{display:none;position:absolute;top:100%;right:0;z-index:10000;margin-top:8px;width:min(420px,92vw);background:#061018;border:1px solid #00ffee44;border-radius:12px;padding:20px;box-sizing:border-box;text-align:center;box-shadow:0 8px 40px rgba(0,255,238,0.15),0 0 1px #00ffee44}
+#donatePanel.open{display:block}
+.donate-toggle{display:flex;gap:0;margin-bottom:16px;border-radius:8px;overflow:hidden;border:1px solid #00ffee66}
+.donate-toggle button{flex:1;padding:10px 0;background:#081821;color:#00ffee;border:none;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:14px;font-weight:700;letter-spacing:2px;transition:background 0.2s,box-shadow 0.2s,text-shadow 0.2s}
+.donate-toggle button:hover{background:#0c2430;text-shadow:0 0 8px #00ffee}
+.donate-toggle button.active{background:#00ffee;color:#061018;text-shadow:none;box-shadow:0 0 18px #00ffee66}
+.donate-qr{margin:16px auto;width:180px;height:180px;border-radius:10px;border:1px solid #00ffee44;overflow:hidden;background:#fff}
+.donate-qr img{width:100%;height:100%;object-fit:contain}
+.donate-addr-wrap{display:flex;align-items:center;gap:8px;margin-top:12px;background:#081821;border:1px solid #00ffee33;border-radius:8px;padding:10px 12px}
+.donate-addr{flex:1;font-family:'Share Tech Mono',monospace;font-size:12px;color:#00ffee;word-break:break-all;text-align:left;user-select:all}
+.donate-copy-btn{background:none;border:1px solid #00ffee55;color:#00ffee;padding:6px 12px;border-radius:6px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1px;transition:background 0.15s,box-shadow 0.15s;white-space:nowrap}
+.donate-copy-btn:hover{background:#0c2430;box-shadow:0 0 12px #00ffee66}
+.donate-btn{padding:10px 20px;border:1px solid #00ffee66;background:#081821;color:#00ffee;font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:2px;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s,background 0.15s,text-shadow 0.15s;border-radius:6px;margin-top:12px}
+.donate-btn:hover{background:#0c2430;transform:translateY(-2px);box-shadow:0 0 18px #00ffee88,0 0 36px #00ffee44;text-shadow:0 0 8px #00ffee;border-color:#00ffeebb}
 a{color:#00ffee;text-decoration:none}
 #splashScreen{position:fixed;top:0;left:0;width:100vw;height:100vh;background:#02070d;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:99999;transition:opacity 0.5s ease}
 #splashScreen.fade-out{opacity:0}
 #splashScreen video{width:140px;height:140px;border-radius:50%;border:1px solid #00ffee88;box-shadow:0 0 30px #00ffee,0 0 60px #00ffee55;animation:radarPulse 2s infinite}
 #splashScreen .splash-title{margin-top:20px;font-size:28px;font-weight:700;letter-spacing:3px;color:#06161c;text-shadow:0 0 30px #00ffee,0 0 60px #00ffee,0 0 100px #00ffee88}
 #splashScreen .splash-sub{font-size:13px;letter-spacing:6px;color:#00ffee;margin-top:6px;font-family:'Share Tech Mono'}
+.ai-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;padding:0 28px 28px}.ai-tile{display:flex;align-items:center;gap:14px;padding:16px 18px;background:#081821;border:1px solid #00ffee33;border-radius:8px;color:#d7ffff;text-decoration:none;font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:1px;transition:border-color 0.2s,box-shadow 0.2s,background 0.2s,transform 0.15s}.ai-tile:hover{border-color:#00ffee;box-shadow:0 0 18px #00ffee44,0 0 36px #00ffee22;background:#0c2430;transform:translateY(-2px);color:#00ffee;text-shadow:0 0 6px #00ffee88}.ai-tile-icon{font-size:22px;flex-shrink:0;width:30px;text-align:center}.ai-section-hdr{color:#00ffee;font-family:'Share Tech Mono',monospace;font-size:14px;letter-spacing:3px;padding:20px 28px 6px;margin:0;border-bottom:1px solid #00ffee22;text-shadow:0 0 8px #00ffee66}
 .loader-wrap{margin-top:32px;width:260px;height:3px;background:#0a1a22;border-radius:2px;overflow:hidden}
 .loader-bar{width:0;height:100%;background:linear-gradient(90deg,#00ffee,#00ffeedd);border-radius:2px;animation:loadBar 3s ease-in-out forwards}
 @keyframes loadBar{0%{width:0}100%{width:100%}}
@@ -102,7 +119,7 @@ a{color:#00ffee;text-decoration:none}
 </div>
 <header id='commandHeader'>
 <div class='brand-wrap'>
-<a href='https://www.blacksurvivalgear.com/' target='_blank'><video class='radar-logo' autoplay muted loop playsinline><source src='https://blacksurvivalgear.github.io/osint/RADAR3.mp4'></video></a>
+<a href='https://www.blacksurvivalgear.com/' target='_blank'><video class='radar-logo' autoplay muted loop playsinline onmouseover='toggleDonatePanel()' style='cursor:pointer'><source src='https://blacksurvivalgear.github.io/osint/RADAR3.mp4'></video></a>
 <div><div class='callsign'>BLACK SURVIVAL GEAR</div><div class='subline'>Members</div><div class='OSINT PLATFORM-sub'>OSINT PLATFORM</div></div>
 </div>
 <div class='header-center' style='position:relative'>
@@ -113,6 +130,9 @@ a{color:#00ffee;text-decoration:none}
 <button id='marineBtn' class='command-btn'>MARINE WATCH</button>
 <button id='flightBtn' class='command-btn'>FLIGHT WATCH</button>
 <button id='marketsBtn' class='command-btn'>MARKETS</button>
+<button id='radioBtn' class='command-btn'>RADIO</button>
+<button id='aiLaunchpadBtn' class='command-btn'>AI LAUNCHPAD</button>
+<button id='discordBtn' class='command-btn'>DISCORD</button>
 </div>
 <div id='gmtClock' onclick='toggleAfricaTime()'></div>
 <div id='gmtClockFlag' style='text-align:center;font-size:28px;line-height:1;display:none;cursor:pointer' onclick='openCountryView()'></div>
@@ -136,15 +156,43 @@ a{color:#00ffee;text-decoration:none}
 </div>
 </div>
 <div class='header-right'>
+<button class='donate-btn' onclick='toggleDonatePanel()'>Support BSG</button>
+<div id='donatePanel'>
+<h2 style='color:#00ffee;font-family:Share Tech Mono,monospace;letter-spacing:2px;text-shadow:0 0 10px #00ffee88;margin-bottom:14px'>SUPPORT BSG OSINT</h2>
+<div class='donate-toggle'>
+<button id='donateCategoryBtnCrypto' class='active' onclick='switchDonateCategory("crypto")'>CRYPTO</button>
+<button id='donateCategoryBtnFiat' onclick='switchDonateCategory("fiat")'>FIAT</button>
+</div>
+<div id='donateCryptoCategory'>
+<div class='donate-toggle' style='margin-bottom:12px'>
+<button id='donateBtcBtn' class='active' onclick='switchDonateNetwork("btc")'>BTC</button>
+<button id='donateUsdtBtn' onclick='switchDonateNetwork("usdt")'>USDT (TRON)</button>
+</div>
+<div class='donate-qr'><img id='donateQrImg' src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bc1quy9rhgtc4jg2auyjpj0tns0fk3s7h7ktzr62p6' alt='QR Code' /></div>
+<div class='donate-addr-wrap'>
+<span class='donate-addr' id='donateAddr'>bc1quy9rhgtc4jg2auyjpj0tns0fk3s7h7ktzr62p6</span>
+<button class='donate-copy-btn' id='donateCopyBtn' onclick='copyDonateAddr()'>COPY</button>
+</div>
+</div>
+<div id='donateFiatCategory' style='display:none'>
+<div style='display:flex;flex-direction:column;gap:12px;margin:20px 0'>
+<a href='https://www.paypal.com/ncp/payment/496D9VBSUK462' target='_blank' rel='noopener noreferrer' class='donate-btn' style='display:inline-block;text-decoration:none;padding:14px 32px;font-size:15px;text-align:center'>DONATE VIA PAYPAL</a>
+<a href='https://www.paypal.com/ncp/payment/496D9VBSUK462' target='_blank' rel='noopener noreferrer' class='donate-btn' style='display:inline-block;text-decoration:none;padding:14px 32px;font-size:15px;text-align:center'>DONATE VIA APPLE PAY</a>
+</div>
+<p style='color:#7fd6df;font-size:12px;font-family:Share Tech Mono,monospace;margin-top:8px'>You will be redirected to complete your donation.</p>
+</div>
+</div>
+<div class='price-row'>
 <div class='market-box'><div>BRENT</div><div class='market-price' id='priceBrent'>--</div></div>
 <div class='market-box'><div>GOLD</div><div class='market-price' id='priceGold'>--</div></div>
 <div class='market-box'><div>SILVER</div><div class='market-price' id='priceSilver'>--</div></div>
 <div class='market-box'><div>BTC</div><div class='market-price' id='priceBtc'>--</div></div>
 </div>
+</div>
 </header>
 <div id='breakingBanner'><div class='breaking-inner'><span class='breaking-tag'>BREAKING</span><div class='breaking-scroll'><div id='breakingTrack' class='breaking-track'></div></div></div></div>
 <div id='newsTickerWrap'>
-<div style='display:flex;align-items:stretch;height:30px;border-bottom:1px solid #00ffee22'><div id='tickerModeToggle' style='display:flex;flex-shrink:0'><button class='channel tickerModeBtn active' onclick='setTickerMode("global")' style='font-weight:700;border-right:2px solid #00ffee44;padding:0 10px;font-size:11px'>GLOBAL</button><button class='channel tickerModeBtn' onclick='setTickerMode("africa")' style='font-weight:700;border-right:2px solid #00ffee44;padding:0 10px;font-size:11px'>AFRICA</button></div><div id='tickerChannels' class='channel-wrap'></div></div>
+<div style='display:flex;align-items:stretch;height:30px;border-bottom:1px solid #00ffee22'><div id='tickerModeToggle' style='display:flex;flex-shrink:0'><button class='channel tickerModeBtn' onclick='setTickerMode("global")' style='font-weight:700;border-right:2px solid #00ffee44;padding:0 10px;font-size:11px'>GLOBAL</button><button class='channel tickerModeBtn active' onclick='setTickerMode("africa")' style='font-weight:700;border-right:2px solid #00ffee44;padding:0 10px;font-size:11px'>AFRICA</button></div><div id='tickerChannels' class='channel-wrap'></div></div>
 <div class='ticker-window' style='height:36px'><div id='newsTicker' class='ticker-track'>Loading Tactical Feed...</div></div>
 </div>
 <section class='placeholder'><div id='opsBay' class='ops-bay'></div></section>
@@ -153,10 +201,11 @@ a{color:#00ffee;text-decoration:none}
 <a href='#'>BlackSurvivalGear.com</a>
 <span class='version'>v1.0.0</span>
 </footer>
+<script src='bugout-data.js'></script>
 <script>
 setTimeout(()=>{let s=document.getElementById('splashScreen');s.classList.add('fade-out');setTimeout(()=>s.remove(),500)},3000);
 let headerTz=null,headerTzLabel='',headerTzIso='';
-function updateClock(){const now=new Date();const flagEl=document.getElementById('gmtClockFlag');if(headerTz){const time=new Intl.DateTimeFormat('en-GB',{timeZone:headerTz,weekday:'short',day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(now);gmtClock.textContent=time+' | '+headerTzLabel;if(flagEl){flagEl.innerHTML=`<img src='https://flagcdn.com/w80/${headerTzIso}.png' alt='${headerTzLabel.replace(/'/g,"&#39;")}' style='width:36px;height:auto;border-radius:3px'>`;flagEl.style.display='block'}}else{gmtClock.textContent=now.toUTCString().replace('GMT','GMT / ZULU');if(flagEl){flagEl.innerHTML='';flagEl.style.display='none'}}}setInterval(updateClock,1000);updateClock();
+function updateClock(){const now=new Date();const flagEl=document.getElementById('gmtClockFlag');if(headerTz){const time=new Intl.DateTimeFormat('en-GB',{timeZone:headerTz,weekday:'short',day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',hour12:false}).format(now);gmtClock.textContent=time+' | '+headerTzLabel;if(flagEl){flagEl.innerHTML=`<img src='https://flagcdn.com/w80/${headerTzIso}.png' alt='${headerTzLabel.replace(/'/g,"&#39;")}' style='width:36px;height:auto;border-radius:3px'>`;flagEl.style.display='block'}}else{const utc=new Intl.DateTimeFormat('en-GB',{timeZone:'UTC',weekday:'short',day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',hour12:false}).format(now);gmtClock.textContent=utc+' GMT / ZULU';if(flagEl){flagEl.innerHTML='';flagEl.style.display='none'}}}setInterval(updateClock,1000);updateClock();
 function setHeaderTime(tz,label,iso){headerTz=tz;headerTzLabel=label;headerTzIso=iso||'';const setBtn=document.getElementById('setCountryBtn');if(setBtn){setBtn.style.display=tz?'none':'block'}updateClock();atwRender();atwUpdateTimes()}
 
 let africaTimePanelOpen=false,africaTimeHideTimer=null;
@@ -218,7 +267,15 @@ const atwAllCities=[
 {iso:"tn",name:"Tunisia",city:"Tunis",tz:"Africa/Tunis"},
 {iso:"ug",name:"Uganda",city:"Kampala",tz:"Africa/Kampala"},
 {iso:"zm",name:"Zambia",city:"Lusaka",tz:"Africa/Lusaka"},
-{iso:"zw",name:"Zimbabwe",city:"Harare",tz:"Africa/Harare"}
+{iso:"zw",name:"Zimbabwe",city:"Harare",tz:"Africa/Harare"},
+{iso:"ag",name:"Antigua and Barbuda",city:"St. John's",tz:"America/Antigua"},
+{iso:"bb",name:"Barbados",city:"Bridgetown",tz:"America/Barbados"},
+{iso:"br",name:"Brazil",city:"Brasília",tz:"America/Sao_Paulo"},
+{iso:"gd",name:"Grenada",city:"St. George's",tz:"America/Grenada"},
+{iso:"gy",name:"Guyana",city:"Georgetown",tz:"America/Guyana"},
+{iso:"jm",name:"Jamaica",city:"Kingston",tz:"America/Jamaica"},
+{iso:"lc",name:"Saint Lucia",city:"Castries",tz:"America/St_Lucia"},
+{iso:"tt",name:"Trinidad and Tobago",city:"Port of Spain",tz:"America/Port_of_Spain"}
 ];
 function atwFlagImg(iso,size){return `<img src='https://flagcdn.com/w40/${iso}.png' alt='' style='width:${size||20}px;height:auto;vertical-align:middle;border-radius:2px'>`}
 let atwShowAll=false;const atwTopCount=8;
@@ -233,19 +290,19 @@ function atwRender(){
 const filtered=atwGetFiltered();
 const list=atwShowAll?filtered:filtered.slice(0,atwTopCount);
 atwGrid.innerHTML='';
-list.forEach((c,i)=>{const card=document.createElement('div');card.className='atw-card';card.id='atw-card-'+i;const isActive=headerTz===c.tz;card.innerHTML=`<div class='atw-country'><span class='atw-flag'>${atwFlagImg(c.iso)}</span>${c.name}</div><div class='atw-city'>${c.city}</div><div class='atw-time' id='atw-time-${i}'>--:--:--</div><div class='atw-date' id='atw-date-${i}'></div><div style='display:flex;gap:6px;margin-top:6px'><button class="atw-set-btn${isActive?' active':''}" data-tz="${c.tz}" data-iso="${c.iso}">${isActive?'RESET':'SET'}</button><button class="atw-set-btn" onclick="atwViewCountry('${c.name.replace(/'/g,"\\'")}','${c.iso}')">VIEW</button></div>`;card.querySelector('.atw-set-btn').onclick=function(){if(isActive){setHeaderTime(null,'','')}else{setHeaderTime(c.tz,c.name,c.iso)}};atwGrid.appendChild(card)});
+list.forEach((c,i)=>{const card=document.createElement('div');card.className='atw-card';card.id='atw-card-'+i;const isActive=headerTz===c.tz;card.innerHTML=`<div class='atw-country'><span class='atw-flag'>${atwFlagImg(c.iso)}</span>${c.name}</div><div class='atw-city'>${c.city}</div><div class='atw-time' id='atw-time-${i}'>--:--</div><div class='atw-date' id='atw-date-${i}'></div><div style='display:flex;gap:6px;margin-top:6px'><button class="atw-set-btn${isActive?' active':''}" data-tz="${c.tz}" data-iso="${c.iso}">${isActive?'RESET':'SET'}</button><button class="atw-set-btn" onclick="atwViewCountry('${c.name.replace(/'/g,"\\'")}','${c.iso}')">VIEW</button></div>`;card.querySelector('.atw-set-btn').onclick=function(){if(isActive){setHeaderTime(null,'','')}else{setHeaderTime(c.tz,c.name,c.iso)}};atwGrid.appendChild(card)});
 atwSelect.innerHTML='<option value="">Jump to country...</option>'+filtered.map((c,i)=>`<option value="${i}">${c.name}</option>`).join('')}
 function atwUpdateTimes(){
 if(!africaTimePanelOpen)return;
 const now=new Date();const fv=atwHourFormat.value;const h12=fv==='auto'?undefined:(fv==='12');
 const filtered=atwGetFiltered();const list=atwShowAll?filtered:filtered.slice(0,atwTopCount);
-list.forEach((c,i)=>{const te=document.getElementById('atw-time-'+i);const de=document.getElementById('atw-date-'+i);if(te&&de){try{te.textContent=new Intl.DateTimeFormat('en-GB',{timeZone:c.tz,hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:h12}).format(now);de.textContent=new Intl.DateTimeFormat('en-GB',{timeZone:c.tz,weekday:'short',month:'short',day:'numeric'}).format(now)}catch(e){te.textContent='Error'}}})}
+list.forEach((c,i)=>{const te=document.getElementById('atw-time-'+i);const de=document.getElementById('atw-date-'+i);if(te&&de){try{te.textContent=new Intl.DateTimeFormat('en-GB',{timeZone:c.tz,hour:'2-digit',minute:'2-digit',hour12:h12}).format(now);de.textContent=new Intl.DateTimeFormat('en-GB',{timeZone:c.tz,weekday:'short',month:'short',day:'numeric'}).format(now)}catch(e){te.textContent='Error'}}})}
 setInterval(atwUpdateTimes,1000);
 atwSearchBox.addEventListener('input',()=>{atwRender();atwUpdateTimes()});
 atwToggleBtn.addEventListener('click',()=>{atwShowAll=!atwShowAll;atwToggleBtn.textContent=atwShowAll?'Collapse List':'Show All Countries';atwRender();atwUpdateTimes()});
 atwSelect.addEventListener('change',()=>{const idx=atwSelect.value;if(idx!==''){let card=document.getElementById('atw-card-'+idx);if(!card){atwShowAll=true;atwToggleBtn.textContent='Collapse List';atwRender();atwUpdateTimes();card=document.getElementById('atw-card-'+idx)}if(card){card.classList.add('highlight');card.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>card.classList.remove('highlight'),2000)}}});
 atwHourFormat.addEventListener('change',atwUpdateTimes);
-document.addEventListener('click',function(e){const panel=document.getElementById('africaTimePanel');const clock=document.getElementById('gmtClock');const flag=document.getElementById('gmtClockFlag');if(africaTimePanelOpen&&document.contains(e.target)&&!panel.contains(e.target)&&!clock.contains(e.target)&&!(flag&&flag.contains(e.target))){panel.classList.remove('open');africaTimePanelOpen=false}});
+document.addEventListener('click',function(e){const panel=document.getElementById('africaTimePanel');const clock=document.getElementById('gmtClock');const flag=document.getElementById('gmtClockFlag');const setBtn=document.getElementById('setCountryBtn');if(africaTimePanelOpen&&document.contains(e.target)&&!panel.contains(e.target)&&!clock.contains(e.target)&&!(flag&&flag.contains(e.target))&&!(setBtn&&setBtn.contains(e.target))){panel.classList.remove('open');africaTimePanelOpen=false}});
 function atwRestoreWidget(){
 const w=document.getElementById('africaTimeWidget');
 w.innerHTML=atwOriginalHTML;
@@ -259,6 +316,63 @@ atwToggleBtn.addEventListener('click',()=>{atwShowAll=!atwShowAll;atwToggleBtn.t
 atwSelect.addEventListener('change',()=>{const idx=atwSelect.value;if(idx!==''){let card=document.getElementById('atw-card-'+idx);if(!card){atwShowAll=true;atwToggleBtn.textContent='Collapse List';atwRender();atwUpdateTimes();card=document.getElementById('atw-card-'+idx)}if(card){card.classList.add('highlight');card.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>card.classList.remove('highlight'),2000)}}});
 atwHourFormat.addEventListener('change',atwUpdateTimes);
 atwRender();atwUpdateTimes()}
+function bugoutLink(item){if(!item.url)return `<span style='color:#7fd6df;font-size:13px;padding:6px 0;display:inline-block'>${esc(item.name)}</span>`;return `<a href='${safeHref(item.url)}' target='_blank' style='display:inline-block;padding:6px 12px;background:#081821;border:1px solid #00ffee44;border-radius:6px;color:#00ffee;text-decoration:none;font-family:Share Tech Mono,monospace;font-size:12px;transition:background 0.15s,box-shadow 0.15s' onmouseover="this.style.background='#0c2430';this.style.boxShadow='0 0 12px #00ffee66'" onmouseout="this.style.background='#081821';this.style.boxShadow='none'">${esc(item.name)}</a>`}
+function bugoutSection(icon,title,content){return `<div style='margin-bottom:16px'><div style='color:#ff8800;font-family:Share Tech Mono,monospace;font-size:14px;margin-bottom:6px;text-shadow:0 0 6px #ff880066'>${icon} ${title}</div><div style='display:flex;flex-wrap:wrap;gap:6px'>${content}</div></div>`}
+async function renderBugoutPanel(name,iso){
+const w=document.getElementById('africaTimeWidget');
+w.innerHTML=`<div style='text-align:center;padding:40px;color:#ff8800;font-family:Share Tech Mono,monospace'>Loading ${name} Bugout Panel...</div>`;
+const d=bugoutData[name];
+if(!d){w.innerHTML=`<div style='padding:12px'><button class='atw-small-button' onclick="atwViewCountry('${name.replace(/'/g,"\\'")}','${iso}')">⬅ BACK</button><div style='text-align:center;color:#ff4444;padding:20px'>No bugout data available for ${name}.</div></div>`;return}
+const flag=`https://flagcdn.com/w80/${iso}.png`;
+let fxHtml='';
+if(d.fx&&d.currency){
+try{const r=await fetch('https://api.exchangerate-api.com/v4/latest/'+d.currency);const ed=await r.json();if(ed.rates){fxHtml=d.fx.map(c=>{const rate=ed.rates[c];return rate?`<div style='display:inline-block;padding:6px 12px;background:#081821;border:1px solid #ff880044;border-radius:6px;font-family:Share Tech Mono,monospace;font-size:12px;color:#ff8800'>${c}/${d.currency}: ${(1/rate).toFixed(2)}</div>`:''}).join('')}}catch(e){fxHtml='<span style="color:#7fd6df;font-size:12px">FX data unavailable</span>'}
+}
+let travelHtml=d.travel.map(t=>bugoutLink(t)).join('');
+let airHtml='';
+if(d.air.national)airHtml+=bugoutLink({name:d.air.national+' (National)',url:d.air.nationalUrl});
+airHtml+=d.air.regional.map(a=>bugoutLink(a)).join('');
+airHtml+=bugoutLink(d.air.search);
+let groundHtml=d.ground.map(g=>bugoutLink(g)).join('');
+let accomHtml=d.accommodation.map(a=>bugoutLink(a)).join('');
+let commsHtml=d.comms.map(c=>bugoutLink(c)).join('');
+let finHtml=d.financial.map(f=>bugoutLink(f)).join('');
+let newsHtml='';
+const dNews=typeof diasporaNewsSources!=='undefined'?diasporaNewsSources[name]:null;
+if(dNews&&dNews.length){newsHtml=bugoutSection('📰','NEWS SOURCES',dNews.map(s=>bugoutLink({name:s[0],url:s[1]})).join(''))}
+const panNews=typeof panAfricanDiasporaSources!=='undefined'?panAfricanDiasporaSources:[];
+let panHtml='';
+if(panNews.length){panHtml=bugoutSection('🌍','PAN-AFRICAN / DIASPORA',panNews.map(s=>bugoutLink({name:s[0],url:s[1]})).join(''))}
+w.innerHTML=`<div style='padding:12px'>
+<button class='atw-small-button' onclick="atwViewCountry('${name.replace(/'/g,"\\'")}','${iso}')" style='margin-bottom:16px'>⬅ BACK</button>
+<div style='display:flex;align-items:center;gap:12px;margin-bottom:16px'><img src='${flag}' style='width:60px;border-radius:4px'><div><h2 style='margin:0;color:#ff8800;font-family:Share Tech Mono,monospace'>${name} — BUGOUT PANEL</h2><div style='color:#7fd6df;font-size:13px'>Mobility / Resilience</div></div></div>
+${bugoutSection('🛂','TRAVEL DOCUMENTS',travelHtml)}
+${bugoutSection('✈️','AIR MOBILITY',airHtml)}
+${bugoutSection('🚕','GROUND TRANSPORT',groundHtml)}
+${bugoutSection('🏨','ACCOMMODATION',accomHtml)}
+${bugoutSection('📡','COMMUNICATIONS',commsHtml)}
+${bugoutSection('💰','FINANCIAL',finHtml)}
+${fxHtml?bugoutSection('📊','FX WATCH (LIVE)',fxHtml):''}
+${newsHtml}
+${panHtml}
+</div>`;
+}
+function renderCountryHeadlines(name,iso){
+const w=document.getElementById('africaTimeWidget');
+const flag=`https://flagcdn.com/w80/${iso}.png`;
+const cMap={'Algeria':'Algeria','Angola':'Angola','Benin':'Benin','Botswana':'Botswana','Burkina Faso':'BurkinaFaso','Burundi':'Burundi','Cameroon':'Cameroon','Cape Verde':'CapeVerde','Central African Republic':'CentralAfricanRepublic','Chad':'Chad','Congo (Brazzaville)':'Congo','Congo (Kinshasa)':'DRCongo',"C\u00f4te d'Ivoire":'IvoryCoast','Djibouti':'Djibouti','Egypt':'Egypt','Equatorial Guinea':'EquatorialGuinea','Eritrea':'Eritrea','Eswatini':'Eswatini','Ethiopia':'Ethiopia','Gabon':'Gabon','Gambia':'Gambia','Ghana':'Ghana','Guinea':'Guinea','Guinea-Bissau':'GuineaBissau','Kenya':'Kenya','Lesotho':'Lesotho','Liberia':'Liberia','Libya':'Libya','Madagascar':'Madagascar','Malawi':'Malawi','Mali':'Mali','Mauritania':'Mauritania','Morocco':'Morocco','Mozambique':'Mozambique','Namibia':'Namibia','Niger':'Niger','Nigeria':'Nigeria','Rwanda':'Rwanda',"S\u00e3o Tom\u00e9 and Pr\u00edncipe":'SaoTome','Senegal':'Senegal','Sierra Leone':'SierraLeone','Somalia':'Somalia','South Africa':'SouthAfrica','South Sudan':'SouthSudan','Sudan':'Sudan','Tanzania':'Tanzania','Togo':'Togo','Tunisia':'Tunisia','Uganda':'Uganda','Zambia':'Zambia','Zimbabwe':'Zimbabwe','Antigua and Barbuda':'AntiguaAndBarbuda','Barbados':'Barbados','Brazil':'Brazil','Grenada':'Grenada','Guyana':'Guyana','Jamaica':'Jamaica','Saint Lucia':'SaintLucia','Trinidad and Tobago':'TrinidadAndTobago'};
+const dataKey=cMap[name]||'';
+let newsSources=[];
+if(dataKey){for(const reg of Object.values(africaData)){if(reg[dataKey]){newsSources=reg[dataKey];break}}}
+const linksHtml=newsSources.length?newsSources.map((s,i)=>`<button onclick="document.getElementById('chFrame').src='${safeHref(s[1])}'" style='padding:8px 14px;background:${i===0?"#0c2430":"#081821"};border:1px solid ${i===0?"#00ffee":"#00ffee44"};border-radius:6px;color:#00ffee;font-family:Share Tech Mono,monospace;font-size:13px;cursor:pointer;transition:all 0.15s;${i===0?"box-shadow:0 0 8px #00ffee44":""}'onmouseover="this.style.background='#0c2430';this.style.boxShadow='0 0 12px #00ffee66'"onmouseout="this.style.background='${i===0?"#0c2430":"#081821"}';this.style.boxShadow='${i===0?"0 0 8px #00ffee44":"none"}'">${esc(s[0])}</button>`).join(''):'<div style="color:#7fd6df;padding:10px">No news sources available for this country.</div>';
+const firstUrl=newsSources.length?safeHref(newsSources[0][1]):'about:blank';
+w.innerHTML=`<div style='padding:12px'>
+<button class='atw-small-button' onclick="atwViewCountry('${name.replace(/'/g,"\\'")}','${iso}')" style='margin-bottom:16px'>⬅ BACK</button>
+<div style='display:flex;align-items:center;gap:12px;margin-bottom:16px'><img src='${flag}' style='width:60px;border-radius:4px'><div><h2 style='margin:0;color:#00ffee;font-family:Share Tech Mono,monospace'>${name} — HEADLINES</h2><div style='color:#7fd6df;font-size:13px'>Country news sources</div></div></div>
+<div style='display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px'>${linksHtml}</div>
+<iframe id='chFrame' src='${firstUrl}' style='width:100%;height:450px;border:1px solid #00ffee33;border-radius:8px;background:#081821' sandbox='allow-scripts allow-same-origin allow-popups'></iframe>
+</div>`;
+}
 const liveuamapUrls={
 'Algeria':'https://algeria.liveuamap.com/',
 'Angola':'https://drcongo.liveuamap.com/',
@@ -341,7 +455,7 @@ let exRate='N/A';
 try{const er=await fetch('https://api.exchangerate-api.com/v4/latest/USD');const ed=await er.json();if(ed.rates&&ed.rates[currTicker])exRate=ed.rates[currTicker].toFixed(2)}catch(e){}
 const liveMapUrl=liveuamapUrls[name]||'https://africa.liveuamap.com/';
 const mapEmbed=`<iframe src='${liveMapUrl}' class='map-frame' style='width:100%;height:350px;border:none;border-radius:8px;margin-top:12px'></iframe>`;
-const countryNameMap={'Algeria':'Algeria','Angola':'Angola','Benin':'Benin','Botswana':'Botswana','Burkina Faso':'BurkinaFaso','Burundi':'Burundi','Cameroon':'Cameroon','Cape Verde':'CapeVerde','Central African Republic':'CentralAfricanRepublic','Chad':'Chad','Congo (Brazzaville)':'Congo','Congo (Kinshasa)':'DRCongo',"C\u00f4te d'Ivoire":'IvoryCoast','Djibouti':'Djibouti','Egypt':'Egypt','Equatorial Guinea':'EquatorialGuinea','Eritrea':'Eritrea','Eswatini':'Eswatini','Ethiopia':'Ethiopia','Gabon':'Gabon','Gambia':'Gambia','Ghana':'Ghana','Guinea':'Guinea','Guinea-Bissau':'GuineaBissau','Kenya':'Kenya','Lesotho':'Lesotho','Liberia':'Liberia','Libya':'Libya','Madagascar':'Madagascar','Malawi':'Malawi','Mali':'Mali','Mauritania':'Mauritania','Morocco':'Morocco','Mozambique':'Mozambique','Namibia':'Namibia','Niger':'Niger','Nigeria':'Nigeria','Rwanda':'Rwanda',"S\u00e3o Tom\u00e9 and Pr\u00edncipe":'SaoTome','Senegal':'Senegal','Sierra Leone':'SierraLeone','Somalia':'Somalia','South Africa':'SouthAfrica','South Sudan':'SouthSudan','Sudan':'Sudan','Tanzania':'Tanzania','Togo':'Togo','Tunisia':'Tunisia','Uganda':'Uganda','Zambia':'Zambia','Zimbabwe':'Zimbabwe'};
+const countryNameMap={'Algeria':'Algeria','Angola':'Angola','Benin':'Benin','Botswana':'Botswana','Burkina Faso':'BurkinaFaso','Burundi':'Burundi','Cameroon':'Cameroon','Cape Verde':'CapeVerde','Central African Republic':'CentralAfricanRepublic','Chad':'Chad','Congo (Brazzaville)':'Congo','Congo (Kinshasa)':'DRCongo',"C\u00f4te d'Ivoire":'IvoryCoast','Djibouti':'Djibouti','Egypt':'Egypt','Equatorial Guinea':'EquatorialGuinea','Eritrea':'Eritrea','Eswatini':'Eswatini','Ethiopia':'Ethiopia','Gabon':'Gabon','Gambia':'Gambia','Ghana':'Ghana','Guinea':'Guinea','Guinea-Bissau':'GuineaBissau','Kenya':'Kenya','Lesotho':'Lesotho','Liberia':'Liberia','Libya':'Libya','Madagascar':'Madagascar','Malawi':'Malawi','Mali':'Mali','Mauritania':'Mauritania','Morocco':'Morocco','Mozambique':'Mozambique','Namibia':'Namibia','Niger':'Niger','Nigeria':'Nigeria','Rwanda':'Rwanda',"S\u00e3o Tom\u00e9 and Pr\u00edncipe":'SaoTome','Senegal':'Senegal','Sierra Leone':'SierraLeone','Somalia':'Somalia','South Africa':'SouthAfrica','South Sudan':'SouthSudan','Sudan':'Sudan','Tanzania':'Tanzania','Togo':'Togo','Tunisia':'Tunisia','Uganda':'Uganda','Zambia':'Zambia','Zimbabwe':'Zimbabwe','Antigua and Barbuda':'AntiguaAndBarbuda','Barbados':'Barbados','Brazil':'Brazil','Grenada':'Grenada','Guyana':'Guyana','Jamaica':'Jamaica','Saint Lucia':'SaintLucia','Trinidad and Tobago':'TrinidadAndTobago'};
 const dataKey=countryNameMap[name]||'';
 let newsSources=[];
 if(dataKey){for(const reg of Object.values(africaData)){if(reg[dataKey]){newsSources=reg[dataKey];break}}}
@@ -349,7 +463,8 @@ let newsLinksHtml='';
 if(newsSources.length){newsLinksHtml='<div style="margin-top:12px"><div style="color:#00ffee;font-family:Share Tech Mono,monospace;font-size:14px;margin-bottom:8px;text-shadow:0 0 6px #00ffee88">📰 NEWS SOURCES</div><div style="display:flex;flex-wrap:wrap;gap:6px">'+newsSources.map(s=>`<a href='${s[1]}' target='_blank' style='padding:6px 12px;background:#081821;border:1px solid #00ffee44;border-radius:6px;color:#00ffee;text-decoration:none;font-family:Share Tech Mono,monospace;font-size:12px;transition:background 0.15s,box-shadow 0.15s'onmouseover="this.style.background='#0c2430';this.style.boxShadow='0 0 12px #00ffee66'"onmouseout="this.style.background='#081821';this.style.boxShadow='none'">${s[0]}</a>`).join('')+'</div></div>'}
 w.innerHTML=`<div style='padding:12px'>
 <button class='atw-small-button' onclick='atwRestoreWidget()' style='margin-bottom:16px'>⬅ BACK</button>
-<div style='display:flex;align-items:center;gap:12px;margin-bottom:16px'><img src='${flag}' style='width:60px;border-radius:4px'><div><h2 style='margin:0;color:#00ffee;font-family:Share Tech Mono,monospace'>${name}</h2><div style='color:#7fd6df;font-size:13px'>${region} — ${subregion}</div></div></div>
+<div style='display:flex;align-items:center;gap:12px;margin-bottom:12px'><img src='${flag}' style='width:60px;border-radius:4px'><div><h2 style='margin:0;color:#00ffee;font-family:Share Tech Mono,monospace'>${name}</h2><div style='color:#7fd6df;font-size:13px'>${region} — ${subregion}</div></div></div>
+<div style='display:flex;justify-content:center;gap:10px;margin-bottom:16px'><button class='atw-small-button' onclick="renderBugoutPanel('${name.replace(/'/g,"\\'")}','${iso}')" style='background:#0c2430;border-color:#ff8800;color:#ff8800;text-shadow:0 0 6px #ff880088'>🚁 BUGOUT</button><button class='atw-small-button' onclick="renderCountryHeadlines('${name.replace(/'/g,"\\'")}','${iso}')" style='background:#0c2430'>📰 COUNTRY HEADLINES</button></div>
 <div style='display:grid;grid-template-columns:1fr 1fr;gap:8px;font-family:Rajdhani,sans-serif;font-size:14px'>
 <div><span style='color:#7fd6df'>Capital:</span> ${capital}</div>
 <div><span style='color:#7fd6df'>Population:</span> ${pop}</div>
@@ -366,7 +481,7 @@ ${newsLinksHtml}
 ${mapEmbed}
 <div id='countryHeadlines' style='margin-top:12px'></div>
 </div>`;
-const countryRssFeeds={'Premium Times':'https://www.premiumtimesng.com/feed','Channels TV':'https://www.channelstv.com/feed','Leadership':'https://leadership.ng/feed','ThisDay':'https://www.thisdaylive.com/feed','Vanguard':'https://www.vanguardngr.com/feed','Punch':'https://punchng.com/feed','Daily Trust':'https://www.dailytrust.com/feed','The Cable':'https://www.thecable.ng/feed','Sahara Reporters':'https://saharareporters.com/articles/rss','Sudan Tribune':'https://sudantribune.com/feed','Addis Standard':'https://addisstandard.com/feed','Nation':'https://nation.africa/rss.xml','New Vision':'https://www.newvision.co.ug/feed','Citizen':'https://www.thecitizen.co.tz/feed','SABC News':'https://www.sabcnews.com/sabcnews/feed','News24':'https://feeds.news24.com/articles/news24/TopStories/rss','Herald':'https://www.herald.co.zw/feed','Iwacu':'https://www.iwacu-burundi.org/feed','New Times':'https://www.newtimes.co.rw/feed','Radio Okapi':'https://www.radiookapi.net/feed','Cameroon Tribune':'https://www.cameroon-tribune.cm/feed','Algeria Press Service':'https://www.aps.dz/en/component/obrss/all-news?format=feed','Libya Herald':'https://www.libyaherald.com/feed','Juba Monitor':'https://www.jubamonitor.com/feed','FrontPageAfrica':'https://www.frontpageafricaonline.com/feed','Graphic':'https://graphic.com.gh/feed','Mmegi':'https://www.mmegi.bw/feed','Namibian':'https://www.namibian.com.na/feed','Al-Ahram':'https://english.ahram.org.eg/RSS.aspx'};
+const countryRssFeeds={'Premium Times':'https://www.premiumtimesng.com/feed','Channels TV':'https://www.channelstv.com/feed','Leadership':'https://leadership.ng/feed','ThisDay':'https://www.thisdaylive.com/feed','Vanguard':'https://www.vanguardngr.com/feed','Punch':'https://punchng.com/feed','Daily Trust':'https://www.dailytrust.com/feed','The Cable':'https://www.thecable.ng/feed','Sahara Reporters':'https://saharareporters.com/articles/rss','Sudan Tribune':'https://sudantribune.com/feed','Addis Standard':'https://addisstandard.com/feed','Nation':'https://nation.africa/rss.xml','New Vision':'https://www.newvision.co.ug/feed','Citizen':'https://www.thecitizen.co.tz/feed','SABC News':'https://www.sabcnews.com/sabcnews/feed','News24':'https://feeds.news24.com/articles/news24/TopStories/rss','Herald':'https://www.herald.co.zw/feed','Iwacu':'https://www.iwacu-burundi.org/feed','New Times':'https://www.newtimes.co.rw/feed','Radio Okapi':'https://www.radiookapi.net/feed','Cameroon Tribune':'https://www.cameroon-tribune.cm/feed','Algeria Press Service':'https://www.aps.dz/en/component/obrss/all-news?format=feed','Libya Herald':'https://www.libyaherald.com/feed','Juba Monitor':'https://www.jubamonitor.com/feed','FrontPageAfrica':'https://www.frontpageafricaonline.com/feed','Graphic':'https://graphic.com.gh/feed','Mmegi':'https://www.mmegi.bw/feed','Namibian':'https://www.namibian.com.na/feed','Al-Ahram':'https://english.ahram.org.eg/RSS.aspx','Jamaica Gleaner':'https://jamaica-gleaner.com/feed','Stabroek News':'https://www.stabroeknews.com/feed','Kaieteur News':'https://www.kaieteurnewsonline.com/feed','Nation News':'https://nationnews.com/feed','St Lucia Times':'https://stluciatimes.com/feed','Antigua Observer':'https://antiguaobserver.com/feed','Newsday':'https://newsday.co.tt/feed','Alma Preta':'https://almapreta.com.br/feed','Now Grenada':'https://nowgrenada.com/feed','Caribbean News Global':'https://caribbeannewsglobal.com/feed'};
 if(newsSources.length){const hlDiv=document.getElementById('countryHeadlines');hlDiv.innerHTML='<div style="color:#00ffee;font-family:Share Tech Mono,monospace;font-size:14px;margin-bottom:8px;text-shadow:0 0 6px #00ffee88">📡 LATEST HEADLINES</div><div style="color:#7fd6df;font-size:12px">Loading feeds...</div>';const rssApi='https://api.rss2json.com/v1/api.json?rss_url=';let allItems=[];let fetched=0;const feedSources=newsSources.filter(s=>countryRssFeeds[s[0]]);const maxFeeds=Math.min(feedSources.length,3);if(!maxFeeds){hlDiv.innerHTML='';} else {for(let i=0;i<maxFeeds;i++){const srcName=feedSources[i][0];const rssUrl=countryRssFeeds[srcName];(async()=>{let items=[];try{const r=await fetch(rssApi+encodeURIComponent(rssUrl));const d=await r.json();if(d.status==='ok'&&d.items){d.items.slice(0,4).forEach(item=>{items.push({title:item.title,link:item.link,source:srcName,pubDate:item.pubDate})})}}catch(e){}fetched++;allItems=allItems.concat(items);if(fetched>=maxFeeds){if(allItems.length){allItems.sort((a,b)=>new Date(b.pubDate)-new Date(a.pubDate));hlDiv.innerHTML='<div style="color:#00ffee;font-family:Share Tech Mono,monospace;font-size:14px;margin-bottom:8px;text-shadow:0 0 6px #00ffee88">📡 LATEST HEADLINES</div>'+allItems.slice(0,8).map(it=>`<a href='${safeHref(it.link)}' target='_blank' style='display:block;padding:8px;margin-bottom:4px;background:#081821;border-left:2px solid #00ffee44;color:#d7ffff;text-decoration:none;font-size:13px;transition:background 0.15s'onmouseover="this.style.background='#0c2430'"onmouseout="this.style.background='#081821'"><span style='color:#00ffee;font-size:11px'>${esc(it.source)} — ${it.pubDate?new Date(it.pubDate).toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):''}</span><br>${esc(it.title)}</a>`).join('')}else{hlDiv.innerHTML=''}}})()}}}
 }catch(e){w.innerHTML=`<div style='padding:20px'><button class='atw-small-button' onclick='atwRestoreWidget()'>⬅ BACK</button><div style='text-align:center;color:#ff4444;padding:20px'>Failed to load country data.</div></div>`}}
 function esc(s){let d=document.createElement('div');d.textContent=s;return d.innerHTML}
@@ -375,7 +490,7 @@ let full=false,idx=0;
 function active(id){document.querySelectorAll('.command-btn').forEach(b=>b.classList.remove('active'));document.getElementById(id).classList.add('active')}
 function renderOps(menu,content){opsBay.style.cssText='';full=false;opsBay.innerHTML=`<div id='opsShell'><div id='opsMenu'><button class='panel-trigger' onclick="document.getElementById('opsMenu').classList.toggle('open')" title='COMMAND PANEL'>☰</button><div class='menu-content'>${menu}</div></div><div id='opsViewport' style='height:100%;overflow-y:auto;min-height:0'>${content}</div></div>`}
 
-const globalFeeds=[['WAR ROOM','https://rumble.com/embed/v33aw1a/?pub=4jw3x3'],['AL JAZEERA','https://www.youtube.com/embed/gCNeDWCI0vo'],['AFRICA','https://www.youtube.com/embed/W8nThq62Vb4'],['BLOOMBERG','https://www.youtube.com/embed/iEpJwprxDdk'],['DW','https://www.youtube.com/embed/LuKwFajn37U'],['SKY','https://www.youtube.com/embed/YDvsBbKfLPA']];
+const globalFeeds=[['RT','https://rumble.com/embed/v33aw1a/?pub=4jw3x3'],['AL JAZEERA','https://www.youtube.com/embed/gCNeDWCI0vo'],['AFRICA','https://www.youtube.com/embed/W8nThq62Vb4'],['BLOOMBERG','https://www.youtube.com/embed/iEpJwprxDdk'],['DW','https://www.youtube.com/embed/LuKwFajn37U'],['SKY','https://www.youtube.com/embed/YDvsBbKfLPA']];
 
 
 const africanChannels=[['DW Africa','https://www.youtube.com/embed/W8nThq62Vb4'],['Africa Live','https://www.youtube.com/embed/E8PRZmDUiPw'],['Africa Today','https://www.youtube.com/embed/NQjabLGdP5g'],['Africa Now','https://www.youtube.com/embed/Mv14aabg4mA'],['Africanews','https://www.youtube.com/embed/NJ1GmKo9zIg']];
@@ -390,7 +505,8 @@ NorthAfrica:{Algeria:[['Algeria Press Service','https://www.aps.dz'],['El Watan'
 WestAfrica:{AES:[['Sputnik Africa','https://en.sputniknews.africa/search/?query=AES'],['leFaso','https://www.lefaso.net'],['Burkina24','https://www.burkina24.com'],['Maliweb','https://www.maliweb.net'],['Le Republicain','https://www.maliweb.net'],['Niamey24','https://www.niameysoir.com'],['Le Sahel','https://www.lesahel.org']],Benin:[['Fraternite','https://www.fraternitebj.info'],['Le Matinal','https://www.lematinal.bj']],BurkinaFaso:[['leFaso','https://www.lefaso.net'],['Burkina24','https://www.burkina24.com']],CapeVerde:[['A Semana','https://www.asemana.cv'],['Santiago Magazine','https://www.santiagomagazine.cv']],Gambia:[['The Point','https://thepoint.gm'],['Foroyaa','https://foroyaa.net']],Ghana:[['Graphic','https://graphic.com.gh'],['Daily Guide','https://dailyguidenetwork.com']],Guinea:[['Guinee24','https://guinee24.com'],['Conakry Infos','https://www.conakryinfos.com']],GuineaBissau:[['O Gologb','https://www.ogologb.com'],['Novidades','https://novidades.gw']],IvoryCoast:[['Abidjan.net','https://www.abidjan.net'],['Le Patriote','https://www.lepatriote.net']],Liberia:[['New Dawn','https://www.newdawnliberia.com'],['FrontPageAfrica','https://www.frontpageafricaonline.com']],Mali:[['Maliweb','https://www.maliweb.net'],['Le Republicain','https://www.maliweb.net']],Niger:[['Niamey24','https://www.niameysoir.com'],['Le Sahel','https://www.lesahel.org']],Nigeria:[['Premium Times','https://www.premiumtimesng.com'],['Channels TV','https://www.channelstv.com'],['Leadership','https://leadership.ng'],['The Nation','https://thenationonlineng.net'],['ThisDay','https://www.thisdaylive.com'],['Tribune','https://tribuneonlineng.com'],['Naija News','https://www.naijanews.com'],['The Cable','https://www.thecable.ng'],['Daily Sun','https://www.sunnewsonline.com'],['Ripples','https://www.ripplesnigeria.com'],['Sahara Reporters','https://www.saharareporters.com'],['Vanguard','https://www.vanguardngr.com'],['Punch','https://www.punchng.com'],['Daily Trust','https://www.dailytrust.com']],Senegal:[['Le Soleil','https://www.lesoleil.sn'],['Seneweb','https://www.seneweb.com']],SierraLeone:[['Concord Times','https://www.concordtimes.com'],['Sierra Express','https://www.sierraexpressmedia.com']],Togo:[['Togo Presse','https://www.togopresse.tg'],['Le Correcteur','https://lecorrecteur.info']]},
 CentralAfrica:{Angola:[['Jornal de Angola','https://www.jornaldeangola.ao'],['O Pais','https://www.opais.co.ao']],Cameroon:[['Cameroon Tribune','https://www.cameroon-tribune.cm'],['CRTV','https://www.crtv.cm']],CentralAfricanRepublic:[['Journal de Bangui','https://www.journaldebangui.com'],['Radio Ndeke Luka','https://www.radiondekeluka.org']],Chad:[['Alwihda','https://www.alwihdainfo.com'],['Le Progres','https://www.leprogres.td']],Congo:[['Les Depeches','https://www.lesdepechesdebrazzaville.fr'],['Congo24','https://www.congo24.net']],DRCongo:[['Radio Okapi','https://www.radiookapi.net'],['Le Potentiel','https://www.lepotentiel.cd']],Gabon:[['Gabon24','https://www.gabon24.ga'],['Nouvelle Republique','https://www.lanouvellerepublique.com']],EquatorialGuinea:[['Diario Rombe','https://www.diariorombe.es'],['Radio Macuto','https://radiomacuto.net']],SaoTome:[['Tela Non','https://www.telanon.info'],['STP24','https://www.stp24.com']]},
 EastAfrica:{Burundi:[['Iwacu','https://www.iwacu-burundi.org'],['Renouveau','https://www.renouveau.digital']],Djibouti:[['La Nation','https://www.lanation.dj'],['Djibouti24','https://www.djibouti24.com']],Eritrea:[['ENA','http://www.shabait.com'],['Asmarino','https://www.asmarino.com']],Ethiopia:[['Addis Standard','https://addisstandard.com'],['Reporter','https://www.ethiopianreporter.com']],Kenya:[['Nation','https://nation.africa'],['Capital FM','https://www.capitalfm.co.ke']],Madagascar:[['Midi Madagasikara','https://www.midi-madagasikara.mg'],["L'Express",'https://lexpress.mg']],Malawi:[['Nation MW','https://www.mwnation.com'],['Malawi24','https://malawi24.com']],Mozambique:[['Noticias','https://www.jornalnoticias.co.mz'],['O Pais','https://www.opais.co.mz']],Rwanda:[['New Times','https://www.newtimes.co.rw'],['Rwanda Today','https://www.rwandatoday.africa']],Somalia:[['Radio Muqdisho','https://www.radiomuqdisho.so'],['SONNA','https://sonna.so']],SouthSudan:[['Juba Monitor','https://www.jubamonitor.com'],['Radio Tamazuj','https://radiotamazuj.org']],Tanzania:[['Citizen','https://www.thecitizen.co.tz'],['Daily News','https://www.dailynews.co.tz']],Uganda:[['New Vision','https://www.newvision.co.ug'],['Observer','https://www.observer.ug']],Zambia:[['Daily Mail','https://www.daily-mail.co.zm'],['Post','https://www.postzambia.com']],Zimbabwe:[['Herald','https://www.herald.co.zw'],['NewsDay','https://www.newsday.co.zw']]},
-SouthernAfrica:{Botswana:[['Mmegi','https://www.mmegi.bw'],['Patriot','https://www.thepatriot.co.bw']],Lesotho:[['Lesotho Times','https://lestimes.com'],['Public Eye','https://publiceyenews.com']],Namibia:[['New Era','https://www.ne.com.na'],['Namibian','https://www.namibian.com.na']],SouthAfrica:[['SABC News','https://www.sabcnews.com'],['News24','https://www.news24.com'],['Mail & Guardian','https://mg.co.za']],Eswatini:[['Observer','https://www.observer.org.sz'],['Times','https://www.times.co.sz']]}
+SouthernAfrica:{Botswana:[['Mmegi','https://www.mmegi.bw'],['Patriot','https://www.thepatriot.co.bw']],Lesotho:[['Lesotho Times','https://lestimes.com'],['Public Eye','https://publiceyenews.com']],Namibia:[['New Era','https://www.ne.com.na'],['Namibian','https://www.namibian.com.na']],SouthAfrica:[['SABC News','https://www.sabcnews.com'],['News24','https://www.news24.com'],['Mail & Guardian','https://mg.co.za']],Eswatini:[['Observer','https://www.observer.org.sz'],['Times','https://www.times.co.sz']]},
+Diaspora:{Jamaica:[['Jamaica Gleaner','https://jamaica-gleaner.com'],['Jamaica Observer','https://www.jamaicaobserver.com'],['Nationwide 90FM','https://nationwideradiojm.com'],['PBC Jamaica','https://pbcjamaica.com']],TrinidadAndTobago:[['Newsday','https://newsday.co.tt'],['Trinidad Guardian','https://guardian.co.tt'],['CNC3','https://www.cnc3.co.tt']],Barbados:[['Nation News','https://nationnews.com'],['Barbados Today','https://barbadostoday.bb']],Grenada:[['The New Today','https://thenewtodaygrenada.com'],['Now Grenada','https://nowgrenada.com']],SaintLucia:[['St Lucia Times','https://stluciatimes.com'],['The Voice St Lucia','https://thevoiceslu.com'],['St Lucia Star','https://stluciastar.com']],AntiguaAndBarbuda:[['Antigua Observer','https://antiguaobserver.com'],['Antigua News Room','https://antiguanewsroom.com'],['ABS Antigua','https://abstvmradio.com']],Guyana:[['Stabroek News','https://www.stabroeknews.com'],['Kaieteur News','https://www.kaieteurnewsonline.com'],['Guyana Chronicle','https://guyanachronicle.com'],['Village Voice News','https://villagevoicenews.com']],Brazil:[['Alma Preta','https://almapreta.com.br'],['Geledés','https://www.geledes.org.br'],['Mundo Negro','https://mundonegro.inf.br']]}
 };
 
 function renderNews(){
@@ -558,8 +674,35 @@ async function exchFetchRates(base){const r=await fetch('https://api.exchangerat
 async function exchUpdateTable(){try{const rates=await exchFetchRates('NGN');const pairs={gbp:'GBP',usd:'USD',cad:'CAD',eur:'EUR',rub:'RUB',cny:'CNY',zar:'ZAR'};for(const[id,code]of Object.entries(pairs)){const el=document.getElementById('rate-'+id);if(el){const rate=rates[code];el.textContent=rate?(1/rate).toFixed(2):'0.00'}}}catch(e){}}
 async function exchConvert(){const amount=parseFloat(document.getElementById('exchAmount').value);const from=document.getElementById('exchFrom').value;const to=document.getElementById('exchTo').value;const res=document.getElementById('exchResult');const err=document.getElementById('exchError');if(isNaN(amount)||amount<=0){err.textContent='Please enter a valid amount.';res.textContent='';return}err.textContent='';res.textContent='';try{const rates=await exchFetchRates(from);const rate=rates[to];if(rate){res.textContent=amount+' '+from+' = '+(amount*rate).toFixed(2)+' '+to}else{res.textContent='Conversion not available.'}}catch(e){res.textContent='';err.textContent='Failed to fetch rates.'}}
 
-newsBtn.onclick=loadNews;mapBtn.onclick=loadConflict;marineBtn.onclick=loadMarine;flightBtn.onclick=loadFlight;marketsBtn.onclick=loadMarkets;headlinesBtn.onclick=loadHeadlines;
-let headlineMode='global';
+newsBtn.onclick=loadNews;mapBtn.onclick=loadConflict;marineBtn.onclick=loadMarine;flightBtn.onclick=loadFlight;marketsBtn.onclick=loadMarkets;headlinesBtn.onclick=loadHeadlines;radioBtn.onclick=loadRadio;aiLaunchpadBtn.onclick=loadAILaunchpad;discordBtn.onclick=loadDiscord;
+function popoutDiscord(){window.open('https://e.widgetbot.io/channels/1500947025196220536','BSG_Discord','width=900,height=700,menubar=no,toolbar=no,location=no,status=no')}
+function loadDiscord(){active('discordBtn');renderOps(`<button class='command-btn' onclick='loadDiscord()'>REFRESH</button><br><br><button class='command-btn' onclick='popoutDiscord()'>⧉ POP OUT</button><br><br><button class='command-btn' onclick='loadDiscordSplit()'>⊞ SPLIT VIEW</button>`,`<div style='height:100%;display:flex;flex-direction:column;align-items:center;background:#061018;padding:20px'><div style='width:100%;max-width:900px;flex:1;display:flex;flex-direction:column;border:1px solid #00ffee44;border-radius:10px;box-shadow:0 0 24px #00ffee22,inset 0 0 12px #00ffee08;overflow:hidden'><div style='background:linear-gradient(90deg,#081821,#0c2a35);padding:10px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #00ffee33'><div style='display:flex;align-items:center;gap:10px'><span style="font-size:20px">💬</span><span style='color:#00ffee;font-family:Share Tech Mono,monospace;font-size:14px;letter-spacing:3px;text-shadow:0 0 8px #00ffee66'>BSG OSINT — DISCORD</span></div><button onclick='popoutDiscord()' style='background:transparent;border:1px solid #00ffee44;color:#00ffee;font-family:Share Tech Mono,monospace;font-size:12px;letter-spacing:2px;padding:4px 12px;cursor:pointer;border-radius:4px;transition:all 0.2s;text-shadow:0 0 6px #00ffee88' onmouseover="this.style.background='#0c2430';this.style.boxShadow='0 0 12px #00ffee44'" onmouseout="this.style.background='transparent';this.style.boxShadow='none'">⧉ POP OUT</button></div><iframe src="https://e.widgetbot.io/channels/1500947025196220536" allow="clipboard-write; fullscreen" style="flex:1;width:100%;border:none"></iframe></div></div>`)}
+const splitChannels=[...globalFeeds,...africanChannels,...americanChannels,...asianChannels,...chineseChannels,...europeanChannels,...russianChannels].filter((ch,i,arr)=>arr.findIndex(c=>c[1]===ch[1])===i);
+let splitLeftIdx=0,splitRightIdx=1;
+function initSplitIdx(){splitLeftIdx=splitChannels.findIndex(c=>c[0]==='RT');splitRightIdx=splitChannels.findIndex(c=>c[0]==='AL JAZEERA');if(splitLeftIdx<0)splitLeftIdx=0;if(splitRightIdx<0)splitRightIdx=1}
+initSplitIdx();
+function splitChangeChannel(side,dir){if(side==='left'){splitLeftIdx=(splitLeftIdx+dir+splitChannels.length)%splitChannels.length;document.getElementById('splitLeftLabel').textContent=splitChannels[splitLeftIdx][0]+' LIVE';document.getElementById('splitLeftFrame').src=splitChannels[splitLeftIdx][1]}else{splitRightIdx=(splitRightIdx+dir+splitChannels.length)%splitChannels.length;document.getElementById('splitRightLabel').textContent=splitChannels[splitRightIdx][0]+' LIVE';document.getElementById('splitRightFrame').src=splitChannels[splitRightIdx][1]}}
+const splitArrowStyle="background:transparent;border:1px solid #00ffee44;color:#00ffee;font-family:Share Tech Mono,monospace;font-size:14px;padding:0 6px;cursor:pointer;border-radius:3px;transition:all 0.2s;line-height:22px";
+function loadDiscordSplit(){active('discordBtn');const lCh=splitChannels[splitLeftIdx];const rCh=splitChannels[splitRightIdx];renderOps(`<button class='command-btn' onclick='loadDiscord()'>CHAT ONLY</button><br><br><button class='command-btn' onclick='popoutDiscord()'>⧉ POP OUT</button><br><br><button class='command-btn' onclick='loadDiscordSplit()'>REFRESH</button>`,`<div style='height:100%;display:flex;gap:4px;background:#061018;padding:4px'><div style='flex:1;display:flex;flex-direction:column;border:1px solid #00ffee44;border-radius:8px;overflow:hidden'><div style='background:linear-gradient(90deg,#081821,#0c2a35);padding:6px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #00ffee33'><button onclick='splitChangeChannel("left",-1)' style='${splitArrowStyle}' onmouseover="this.style.background='#0c2430'" onmouseout="this.style.background='transparent'">◀</button><div style='display:flex;align-items:center;gap:6px'><span style='color:#ff4444;font-size:8px'>&#9679;</span><span id='splitLeftLabel' style='color:#00ffee;font-family:Share Tech Mono,monospace;font-size:11px;letter-spacing:2px;text-shadow:0 0 6px #00ffee66'>${lCh[0]} LIVE</span></div><button onclick='splitChangeChannel("left",1)' style='${splitArrowStyle}' onmouseover="this.style.background='#0c2430'" onmouseout="this.style.background='transparent'">▶</button></div><iframe id='splitLeftFrame' src='${lCh[1]}' allow='autoplay;fullscreen;encrypted-media' style='flex:1;width:100%;border:none'></iframe></div><div style='flex:1;display:flex;flex-direction:column;border:1px solid #00ffee44;border-radius:8px;overflow:hidden'><div style='background:linear-gradient(90deg,#081821,#0c2a35);padding:6px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #00ffee33'><div style='display:flex;align-items:center;gap:8px'><span style='font-size:14px'>💬</span><span style='color:#00ffee;font-family:Share Tech Mono,monospace;font-size:11px;letter-spacing:2px;text-shadow:0 0 6px #00ffee66'>DISCORD</span></div><button onclick='popoutDiscord()' style='background:transparent;border:1px solid #00ffee44;color:#00ffee;font-family:Share Tech Mono,monospace;font-size:10px;padding:2px 8px;cursor:pointer;border-radius:3px;transition:all 0.2s' onmouseover="this.style.background='#0c2430'" onmouseout="this.style.background='transparent'">⧉</button></div><iframe src='https://e.widgetbot.io/channels/1500947025196220536' allow='clipboard-write;fullscreen' style='flex:1;width:100%;border:none'></iframe></div><div style='flex:1;display:flex;flex-direction:column;border:1px solid #00ffee44;border-radius:8px;overflow:hidden'><div style='background:linear-gradient(90deg,#081821,#0c2a35);padding:6px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #00ffee33'><button onclick='splitChangeChannel("right",-1)' style='${splitArrowStyle}' onmouseover="this.style.background='#0c2430'" onmouseout="this.style.background='transparent'">◀</button><div style='display:flex;align-items:center;gap:6px'><span style='color:#ff4444;font-size:8px'>&#9679;</span><span id='splitRightLabel' style='color:#00ffee;font-family:Share Tech Mono,monospace;font-size:11px;letter-spacing:2px;text-shadow:0 0 6px #00ffee66'>${rCh[0]} LIVE</span></div><button onclick='splitChangeChannel("right",1)' style='${splitArrowStyle}' onmouseover="this.style.background='#0c2430'" onmouseout="this.style.background='transparent'">▶</button></div><iframe id='splitRightFrame' src='${rCh[1]}' allow='autoplay;fullscreen;encrypted-media' style='flex:1;width:100%;border:none'></iframe></div></div>`)}
+const aiCategories=[
+{title:'GENERAL / MULTI-PURPOSE AI',icon:'🧠',tools:[
+{name:'OpenAI (ChatGPT)',url:'https://chat.openai.com'},{name:'Anthropic (Claude)',url:'https://claude.ai'},{name:'Google (Gemini)',url:'https://gemini.google.com'},{name:'DeepSeek',url:'https://chat.deepseek.com'},{name:'xAI (Grok)',url:'https://grok.com'},{name:'Mistral AI',url:'https://chat.mistral.ai'},{name:'Meta AI',url:'https://www.meta.ai'},{name:'Cohere',url:'https://cohere.com'},{name:'Inflection AI (Pi)',url:'https://pi.ai'},{name:'Alibaba (Qwen)',url:'https://qwenlm.ai'}]},
+{title:'AI SEARCH / OSINT RESEARCH',icon:'🔎',tools:[
+{name:'Perplexity AI',url:'https://www.perplexity.ai'},{name:'You.com',url:'https://you.com'},{name:'Google (Gemini Search)',url:'https://gemini.google.com'},{name:'Microsoft (Copilot)',url:'https://copilot.microsoft.com'},{name:'Brave Search AI',url:'https://search.brave.com'},{name:'Andi Search',url:'https://andisearch.com'},{name:'Phind',url:'https://www.phind.com'},{name:'Kagi Assistant',url:'https://kagi.com'},{name:'Exa',url:'https://exa.ai'},{name:'Elicit',url:'https://elicit.com'}]},
+{title:'IMAGE / VISUAL / GEOINT AI',icon:'🖼️',tools:[
+{name:'Google Lens',url:'https://lens.google.com'},{name:'OpenAI (DALL·E)',url:'https://labs.openai.com'},{name:'Stability AI',url:'https://stability.ai'},{name:'Midjourney',url:'https://www.midjourney.com'},{name:'Hugging Face',url:'https://huggingface.co'},{name:'Runway',url:'https://runwayml.com'},{name:'Planet Labs',url:'https://www.planet.com'},{name:'Maxar Technologies',url:'https://www.maxar.com'},{name:'BlackSky',url:'https://www.blacksky.com'},{name:'Clearview AI',url:'https://www.clearview.ai'}]},
+{title:'AUDIO / SPEECH / COMMS INTEL',icon:'🎧',tools:[
+{name:'OpenAI (Whisper)',url:'https://openai.com/research/whisper'},{name:'AssemblyAI',url:'https://www.assemblyai.com'},{name:'Deepgram',url:'https://deepgram.com'},{name:'Rev',url:'https://www.rev.com'},{name:'Speechmatics',url:'https://www.speechmatics.com'},{name:'Sonix',url:'https://sonix.ai'},{name:'Otter.ai',url:'https://otter.ai'},{name:'Descript',url:'https://www.descript.com'},{name:'ElevenLabs',url:'https://elevenlabs.io'},{name:'Resemble AI',url:'https://www.resemble.ai'}]},
+{title:'AUTOMATION / AGENTS / WORKFLOWS',icon:'⚙️',tools:[
+{name:'Zapier',url:'https://zapier.com'},{name:'Make',url:'https://www.make.com'},{name:'LangChain',url:'https://www.langchain.com'},{name:'LlamaIndex',url:'https://www.llamaindex.ai'},{name:'AutoGPT',url:'https://autogpt.net'},{name:'AgentGPT',url:'https://agentgpt.reworkd.ai'},{name:'CrewAI',url:'https://www.crewai.com'},{name:'Flowise',url:'https://flowiseai.com'},{name:'Dust',url:'https://dust.tt'},{name:'Relevance AI',url:'https://relevanceai.com'}]},
+{title:'CODING / DEV / OSINT BUILD TOOLS',icon:'💻',tools:[
+{name:'GitHub Copilot',url:'https://github.com/features/copilot'},{name:'OpenAI (Codex)',url:'https://openai.com/api'},{name:'Anthropic (Claude Code)',url:'https://claude.ai'},{name:'Cursor',url:'https://cursor.sh'},{name:'Replit',url:'https://replit.com'},{name:'Phind',url:'https://www.phind.com'},{name:'Codeium',url:'https://codeium.com'},{name:'Tabnine',url:'https://www.tabnine.com'},{name:'Sourcegraph (Cody)',url:'https://sourcegraph.com/cody'},{name:'Amazon CodeWhisperer',url:'https://aws.amazon.com/codewhisperer'}]}
+];
+function aiCatId(i){return 'ai-cat-'+i}
+function scrollToAiCat(i){const el=document.getElementById(aiCatId(i));if(!el)return;const vp=document.getElementById('opsViewport');if(vp){const scrollable=vp.firstElementChild;if(scrollable)scrollable.scrollTo({top:el.offsetTop-scrollable.offsetTop,behavior:'smooth'})}}
+function loadAILaunchpad(){active('aiLaunchpadBtn');renderOps(`<button class='command-btn' onclick='loadAILaunchpad()'>REFRESH</button><br><br>${aiCategories.map((c,i)=>"<button class='command-btn' onclick='scrollToAiCat("+i+")'>"+c.icon+" "+esc(c.title)+"</button><br><br>").join('')}`,`<div style='height:100%;overflow-y:auto;background:#061018'><h2 style='text-align:center;color:#00ffee;font-family:Share Tech Mono,monospace;letter-spacing:4px;padding:24px 0 8px;margin:0;text-shadow:0 0 12px #00ffee88'>AI LAUNCHPAD</h2>${aiCategories.map((c,i)=>"<h3 class='ai-section-hdr' id='"+aiCatId(i)+"'>"+c.icon+" "+esc(c.title)+"</h3><div class='ai-grid'>"+c.tools.map(t=>"<a class='ai-tile' href='"+safeHref(t.url)+"' target='_blank' rel='noopener'>"+esc(t.name)+"</a>").join('')+"</div>").join('')}</div>`)}
+function loadRadio(){active('radioBtn');renderOps(`<button class='command-btn' onclick='loadRadio()'>REFRESH</button>`,`<iframe src='https://radio.garden/listen/legacy-90-1-fm/ZZSjC3SX' style='width:100%;height:100%;border:none'></iframe>`)}
+let headlineMode='africa';
 function loadHeadlines(mode){if(mode)headlineMode=mode;active('headlinesBtn');renderOps(`
 <button class='command-btn' onclick='loadHeadlines()'>REFRESH</button>
 `,`<div id='headlinesFrame' style='height:100%;overflow-y:auto;padding:20px;background:#061018'></div>`);renderHeadlineContent()}
@@ -594,7 +737,7 @@ const rss=[
 'https://feeds.skynews.com/feeds/rss/world.xml'
 ];
 const tags=['AJ','AP','BBC','CNBC','DW','EURO','AFRICA','GUARDIAN','REUTERS','RT','SKY'];let cf=0;
-let tickerMode='global';
+let tickerMode='africa';
 const africaTickerFeeds=africaRssFeeds.filter(f=>f.tag!=='NATION'&&f.tag!=='THE CABLE'&&!f.tag.startsWith('AI ')&&f.tag!=='BUSINESS DAY'&&f.tag!=='DAILY MAVERICK'&&f.tag!=='ENA ETHIOPIA'&&f.tag!=='EAST AFRICAN'&&f.tag!=='MAP MOROCCO'&&f.tag!=='SA GOV');
 function setTickerMode(mode){tickerMode=mode;cf=0;document.querySelectorAll('.tickerModeBtn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.tickerModeBtn').forEach(b=>{if((mode==='global'&&b.textContent==='GLOBAL')||(mode==='africa'&&b.textContent==='AFRICA'))b.classList.add('active')});buildTickerChannels();loadTicker()}
 function buildTickerChannels(){const wrap=document.getElementById('tickerChannels');if(tickerMode==='africa'){wrap.innerHTML=africaTickerFeeds.map((f,i)=>`<button class='channel${i===cf?" active":""}' data-idx='${i}'>${f.tag}</button>`).join('')}else{wrap.innerHTML=tags.map((t,i)=>`<button class='channel${i===cf?" active":""}' data-idx='${i}'>${t}</button>`).join('')}wrap.querySelectorAll('.channel').forEach(b=>b.onclick=()=>{wrap.querySelectorAll('.channel').forEach(x=>x.classList.remove('active'));b.classList.add('active');cf=parseInt(b.dataset.idx);loadTicker()})}
@@ -622,7 +765,7 @@ track.innerHTML=newHtml+(existing?existing:'');
 banner.classList.add('active')}
 }
 checkBreaking();setInterval(checkBreaking,120000);
-loadTicker();loadNews();
+loadTicker();loadHeadlines();
 async function fetchPrices(){
 let gotGold=false,gotSilver=false,gotBrent=false;
 try{const r=await fetch('https://scanner.tradingview.com/global/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({symbols:{tickers:['TVC:GOLD','TVC:SILVER','NYMEX:BB1!']},columns:['close']})});const d=await r.json();d.data.forEach(item=>{if(item.s==='TVC:GOLD'){document.getElementById('priceGold').textContent=Math.round(item.d[0]).toLocaleString();gotGold=true}if(item.s==='TVC:SILVER'){document.getElementById('priceSilver').textContent=item.d[0].toFixed(2);gotSilver=true}if(item.s.includes('BB1')){document.getElementById('priceBrent').textContent=item.d[0].toFixed(1);gotBrent=true}})}catch(e){}
@@ -632,6 +775,15 @@ if(!gotBrent){try{const r=await fetch('https://api.allorigins.win/get?url='+enco
 try{const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');const d=await r.json();document.getElementById('priceBtc').textContent=Math.round(d.bitcoin.usd).toLocaleString()}catch(e){}
 }
 fetchPrices();setInterval(fetchPrices,60000);
+
+const donateWallets={btc:{addr:'bc1quy9rhgtc4jg2auyjpj0tns0fk3s7h7ktzr62p6',qr:'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bc1quy9rhgtc4jg2auyjpj0tns0fk3s7h7ktzr62p6'},usdt:{addr:'TJXpvDnuTtx2Zth2YBNgHZnkbymJTnrgzx',qr:'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TJXpvDnuTtx2Zth2YBNgHZnkbymJTnrgzx'}};
+let donateCategory='crypto';
+function switchDonateCategory(cat){donateCategory=cat;document.getElementById('donateCategoryBtnCrypto').classList.toggle('active',cat==='crypto');document.getElementById('donateCategoryBtnFiat').classList.toggle('active',cat==='fiat');document.getElementById('donateCryptoCategory').style.display=cat==='crypto'?'block':'none';document.getElementById('donateFiatCategory').style.display=cat==='fiat'?'block':'none'}
+let donateNetwork='btc';
+function toggleDonatePanel(){document.getElementById('donatePanel').classList.toggle('open')}
+function switchDonateNetwork(net){donateNetwork=net;const w=donateWallets[net];document.getElementById('donateBtcBtn').classList.toggle('active',net==='btc');document.getElementById('donateUsdtBtn').classList.toggle('active',net==='usdt');document.getElementById('donateAddr').textContent=w.addr;document.getElementById('donateQrImg').src=w.qr;document.getElementById('donateCopyBtn').textContent='COPY'}
+function copyDonateAddr(){if(!donateWallets[donateNetwork])return;const addr=donateWallets[donateNetwork].addr;navigator.clipboard.writeText(addr).then(()=>{const btn=document.getElementById('donateCopyBtn');btn.textContent='COPIED';setTimeout(()=>{btn.textContent='COPY'},2000)}).catch(()=>{const t=document.createElement('textarea');t.value=addr;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);const btn=document.getElementById('donateCopyBtn');btn.textContent='COPIED';setTimeout(()=>{btn.textContent='COPY'},2000)})}
+document.addEventListener('click',function(e){const panel=document.getElementById('donatePanel');const btn=document.querySelector('.donate-btn');if(panel.classList.contains('open')&&!panel.contains(e.target)&&!btn.contains(e.target)){panel.classList.remove('open')}});
 </script>
 </body>
 </html>
